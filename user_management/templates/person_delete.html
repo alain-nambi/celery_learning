@@ -1,0 +1,8 @@
+<!-- templates/person_confirm_delete.html -->
+<h1>Confirmer la suppression</h1>
+<p>Êtes-vous sûr de vouloir supprimer {{ person.first_name }} {{ person.last_name }} ?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+</form>
+<a href="{% url 'person_list' %}">Annuler</a>

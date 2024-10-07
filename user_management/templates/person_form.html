@@ -1,0 +1,7 @@
+<!-- templates/person_form.html -->
+<h1>Formulaire Personne</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
