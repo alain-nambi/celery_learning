@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_management',
+    'email_checker',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,13 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'check-emails-every-second': {
+        'task': 'email_checker.tasks.check_new_emails',
+        'schedule': 5.0,  # Run every 1 second
+    },
+}
 
 # Ajoutez vos paramètres d'e-mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
