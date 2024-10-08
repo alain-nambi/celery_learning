@@ -81,25 +81,25 @@ def check_new_emails():
                 if payload:  # Ensure the payload is not None
                     body = payload.decode('utf-8', errors='ignore')
 
-            # if not EmailMessage.objects.filter(
-            #     body=body
-            # ).exists():
+            if not EmailMessage.objects.filter(
+                body=body
+            ).exists():
 
-            # Store the email details in the database
-            EmailMessage.objects.create(
-                subject=subject,
-                from_email=msg['From'],
-                to_email=msg['To'],
-                body=body,
-            )
-            logger.info(f"Email processed: {subject} from {msg['From']}")
+                # Store the email details in the database
+                EmailMessage.objects.create(
+                    subject=subject,
+                    from_email=msg['From'],
+                    to_email=msg['To'],
+                    body=body,
+                )
+                logger.info(f"Email processed: {subject} from {msg['From']}")
 
-            # Mark the email as seen
-            print(f" [___+++ Mail ${e_id} has been marked as SEEN +++___]")
-            mail.store(e_id, '+FLAGS', '\\Seen')
+                # Mark the email as seen
+                print(f" [___+++ Mail ${e_id} has been marked as SEEN +++___]")
+                mail.store(e_id, '+FLAGS', '\\Seen')
 
-            # else:
-            #     logger.info(f"Duplicate body content skipped: {subject} from {msg['From']}")
+            else:
+                logger.info(f"Duplicate body content skipped: {subject} from {msg['From']} body\n {body}")
 
         # Log out from the mail server
         mail.logout()

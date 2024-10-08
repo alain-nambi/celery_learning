@@ -143,7 +143,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'check-emails-every-second': {
         'task': 'email_checker.tasks.check_new_emails',
-        'schedule': 5.0,  # Run every 1 second
+        'schedule': 5.0,  # Run every 5 second
     },
 }
 
