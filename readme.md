@@ -7,3 +7,8 @@ celery -A crudproject worker --loglevel=info -E
 # -E : active tasks events
 celery -A crudproject worker --beat -E
 ```
+
+### Run tests
+```bash
+pytest
+```

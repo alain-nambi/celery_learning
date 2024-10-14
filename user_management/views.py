@@ -26,6 +26,8 @@ def person_create(request):
             )
 
             return redirect('person_list')
+        else:
+            print("Person form is invalid")
     else:
         form = PersonForm()
 
